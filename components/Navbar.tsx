@@ -20,7 +20,7 @@ export default function Navbar() {
                     <Link href="/about" className={`hover:text-gray-300 transition ${pathname === '/about' ? 'underline underline-offset-4 decoration-logoBlue decoration-2 text-xl' : ''}`}>
                         About
                     </Link>
-                    <Link href="https://kyancox.com" target='_blank' className="hover:text-slate-300 transition hidden md:inline">
+                    <Link href="https://kyancox.com" target='_blank' className="hover:text-slate-300 transition">
                         Contact
                     </Link>
                 </div>

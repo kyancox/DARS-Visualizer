@@ -1,12 +1,56 @@
+"use client"
 import FormComponent from "@/components/FormComponent";
 import Button from 'react-bootstrap/Button';
 import Image from "next/image";
+import ProgressBar from "@/components/ProgressBar";
+import { useData } from "@/providers/DataContext";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const { data } = useData()
+  const [name, setName] = useState<string>('')
+
+  useEffect(() => {
+    if (data && data.student_name) {
+      const [lastName, firstName] = data.student_name.split(',');
+      setName(`${firstName.trim()} ${lastName.trim()}`);
+    }
+  }, [data])
+
   return (
     <div>
-      <FormComponent />
-   
+      <div className='lg:w-1/3 w-10/12 mx-auto'>
+        {data && (
+          <div>
+            <p className='text-center text-xl font-bold'>{name} DARS Report</p>
+            <p className='text-center text-xl font-bold'>{data.requested_school}</p>
+            <p className='text-center text-xl font-bold'>{data.requested_major}</p>
+            {data.majors.length > 0 && (
+              <div className="flex flex-row items-center justify-center">
+                <p className='text-center text-xl font-bold'>Declared majors:&nbsp;</p>
+                {data.majors.map((major, index) => (
+                  <span key={index} className="text-xl font-bold">
+                    {index > 0 ? ', ' : ''}{major}
+                  </span>
+                ))}
+              </div>
+            )}
+            {data.certificates.length > 0 && (
+              <div className="flex flex-row items-center justify-center">
+                <p className='text-center text-xl font-bold'>Declared certificates:&nbsp;</p>
+                {data.certificates.map((certificate, index) => (
+                  <span key={index} className="text-xl font-bold">
+                    {index > 0 ? ', ' : ''}{certificate}
+                  </span>
+                ))}
+              </div>
+            )}
+            <p className='text-center text-xl font-bold'>Prepared on: {data.preparation_date}</p>
+          </div>
+        )}
+        <ProgressBar />
+        <FormComponent />
+      </div>
       <>
         {/* <Button variant="primary">Primary</Button>{' '}
         <Button variant="secondary">Secondary</Button>{' '}
@@ -18,7 +62,7 @@ export default function Home() {
         <Button variant="dark">Dark</Button>
         <Button variant="link">Link</Button> */}
       </>
-     
+
     </div>
   );
 }

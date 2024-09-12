@@ -76,6 +76,7 @@ function FormFile() {
 
       setShowAlert(false)
       setData(data);
+      console.log(data)
       // Handle the response data as needed
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -91,7 +92,7 @@ function FormFile() {
     }
   };
   return (
-    <div className='lg:w-1/3 w-10/12 mx-auto'>
+    <div>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label className='text-center mx-auto'>Upload PDF file</Form.Label>

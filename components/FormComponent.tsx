@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react';
+import { useData } from '@/providers/DataContext';
 import Form from 'react-bootstrap/Form';
 import AlertDismissible from './Alert';
 
@@ -45,7 +46,7 @@ interface ExtractedData {
 
 function FormFile() {
   const [file, setFile] = useState<File | null>(null);
-  const [data, setData] = useState<ExtractedData | null>(null);
+  const { data, setData } = useData()
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState<string | null>('')
 
@@ -100,9 +101,9 @@ function FormFile() {
       </Form>
       {showAlert && (
         <div className='mt-2'>
-          <AlertDismissible 
-            variant='danger' 
-            title='Unable to parse PDF.' 
+          <AlertDismissible
+            variant='danger'
+            title='Unable to parse PDF.'
             body={error || 'Please ensure your PDF file is a DARS report.'}
             onClose={() => setShowAlert(false)}
           />
@@ -110,14 +111,14 @@ function FormFile() {
       )}
 
       {data && (
-        
-          data.all_courses.map((course) => (
-            <div key={course.course_name}>
-              <p>{course.course_name}</p>
-              <p>{course.course_code}</p>
-            </div>
-          ))
-        
+
+        data.all_courses.map((course) => (
+          <div key={course.course_name}>
+            <p>{course.course_name}</p>
+            <p>{course.course_code}</p>
+          </div>
+        ))
+
       )}
     </div>
   );

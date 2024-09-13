@@ -110,17 +110,6 @@ function FormFile() {
           />
         </div>
       )}
-
-      {data && (
-
-        data.all_courses.map((course) => (
-          <div key={course.course_name}>
-            <p>{course.course_name}</p>
-            <p>{course.course_code}</p>
-          </div>
-        ))
-
-      )}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Image from "next/image";
 import ProgressBar from "@/components/ProgressBar";
 import { useData } from "@/providers/DataContext";
 import { useEffect, useState } from "react";
+import Tabs from "@/components/Tabs";
 
 export default function Home() {
   const { data } = useData()
@@ -27,22 +28,24 @@ export default function Home() {
             <p className='text-center text-xl font-bold'>{data.requested_major}</p>
             {data.majors.length > 0 && (
               <div className="flex flex-row items-center justify-center">
-                <p className='text-center text-xl font-bold'>Declared majors:&nbsp;</p>
-                {data.majors.map((major, index) => (
-                  <span key={index} className="text-xl font-bold">
-                    {index > 0 ? ', ' : ''}{major}
-                  </span>
-                ))}
+                <p className='text-center text-xl font-bold'>Declared majors:&nbsp;
+                  {data.majors.map((major, index) => (
+                    <span key={index} className="text-xl font-bold">
+                      {index > 0 ? ', ' : ''}{major}
+                    </span>
+                  ))}
+                </p>
               </div>
             )}
             {data.certificates.length > 0 && (
               <div className="flex flex-row items-center justify-center">
-                <p className='text-center text-xl font-bold'>Declared certificates:&nbsp;</p>
-                {data.certificates.map((certificate, index) => (
-                  <span key={index} className="text-xl font-bold">
-                    {index > 0 ? ', ' : ''}{certificate}
-                  </span>
-                ))}
+                <p className='text-center text-xl font-bold'>Declared certificates:&nbsp;
+                  {data.certificates.map((certificate, index) => (
+                    <span key={index} className="text-xl font-bold">
+                      {index > 0 ? ', ' : ''}{certificate}
+                    </span>
+                  ))}
+                </p>
               </div>
             )}
             <p className='text-center text-xl font-bold'>Prepared on: {data.preparation_date}</p>
@@ -50,6 +53,9 @@ export default function Home() {
         )}
         <ProgressBar />
         <FormComponent />
+      </div>
+      <div className="xl:w-3/4 w-11/12 mx-auto">
+        <Tabs />
       </div>
       <>
         {/* <Button variant="primary">Primary</Button>{' '}

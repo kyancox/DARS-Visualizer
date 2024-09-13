@@ -8,6 +8,8 @@ function JustifiedTabs() {
     const [key, setKey] = useState('courses')
     const { data } = useData()
 
+    if (!data) return null
+
     return (
         <>
             <div className='lg:block hidden'>
@@ -18,10 +20,10 @@ function JustifiedTabs() {
                     onSelect={(k) => k !== null && setKey(k)}
                     justify
                 >
-                    <Tab eventKey="courses" title={<span className="text-blue-500 ">All Courses</span>} className="p-4" />
-                    <Tab eventKey="completed" title={<span className="text-green-500  ">Completed Requirements</span>} className="p-4" />
-                    <Tab eventKey="incomplete" title={<span className="text-red-500 ">Incomplete Requirements</span>} className="p-4" />
-                    <Tab eventKey="inprogress" title={<span className="text-yellow-500 ">In Progress Courses</span>} className="p-4" />
+                    <Tab eventKey="courses" title={<span className="text-blue-500 ">All Courses</span>} className="" />
+                    <Tab eventKey="completed" title={<span className="text-green-500  ">Completed Requirements</span>} className="" />
+                    <Tab eventKey="incomplete" title={<span className="text-red-500 ">Incomplete Requirements</span>} className="" />
+                    <Tab eventKey="inprogress" title={<span className="text-yellow-500 ">In Progress Courses</span>} className="" />
                 </Tabs>
             </div>
 
@@ -72,16 +74,17 @@ function JustifiedTabs() {
                             return (
                                 <div className='lg:w-1/2 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>Completed Requirements from DARS</p>
-                                    <Accordion>
+                                    <Accordion alwaysOpen>
                                         {data && (
 
                                             data.completed_requirements.map((req, index) => (
-                                                <Accordion.Item eventKey={index.toString()}>
+                                                <Accordion.Item key={index} eventKey={index.toString()}>
                                                     <Accordion.Header>{req.category}</Accordion.Header>
                                                     <Accordion.Body>
                                                         {req.earned && <p className='text-center'>Earned: <span className='font-bold'>{req.earned}</span></p>}
+                                                        {req.details.length === 0 && <p>No details for this category.</p>}
                                                         {req.details.map(detail => (
-                                                             <p className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\+\s*\d+\)/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
+                                                             <p className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\d+\)\s[A-Z]/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
                                                         ))}
                                                     </Accordion.Body>
                                                 </Accordion.Item>
@@ -94,18 +97,19 @@ function JustifiedTabs() {
                             return (
                                 <div className='lg:w-1/2 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>Incomplete Requirements from DARS</p>
-                                    <Accordion>
+                                    <Accordion alwaysOpen>
                                         {data && (
                                             data.unfulfilled_requirements.map((req, index) => (
-                                                <Accordion.Item eventKey={index.toString()}>
+                                                <Accordion.Item key={index} eventKey={index.toString()}>
                                                     <Accordion.Header>{req.category}</Accordion.Header>
                                                     <Accordion.Body>
                                                         <div className='flex flex-row items-center justify-around'>
                                                             {req.earned && <p>Earned: <span className='font-bold'>{req.earned}</span></p>}
                                                             {req.needs && <p>Needs: <span className='font-bold'>{req.needs}</span></p>}
                                                         </div>
+                                                        {req.details.length === 0 && <p>No details for this category.</p>}
                                                         {req.details.map(detail => (
-                                                            <p className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\+\s*\d+\)/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
+                                                            <p className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\d+\)\s[A-Z]/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
                                                         ))}
                                                     </Accordion.Body>
                                                 </Accordion.Item>

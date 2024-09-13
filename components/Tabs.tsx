@@ -3,12 +3,46 @@ import Tabs from 'react-bootstrap/Tabs';
 import { useState } from 'react';
 import { useData } from '@/providers/DataContext';
 import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
 
 function JustifiedTabs() {
     const [key, setKey] = useState('courses')
     const { data } = useData()
+    const [openAccordions, setOpenAccordions] = useState<string[]>([]);
+    const [openCompletedAccordions, setOpenCompletedAccordions] = useState<string[]>([]);
+    const [openIncompleteAccordions, setOpenIncompleteAccordions] = useState<string[]>([]);
 
     if (!data) return null
+
+    const handleOpenAll = () => {
+        const allKeys = [
+            ...data.completed_requirements.map((_, index) => index.toString()),
+            ...data.unfulfilled_requirements.map((_, index) => index.toString())
+        ];
+        setOpenAccordions(allKeys);
+    };
+
+    const handleCloseAll = () => {
+        setOpenAccordions([]);
+    };
+
+    const handleOpenAllCompleted = () => {
+        const allKeys = data.completed_requirements.map((_, index) => index.toString());
+        setOpenCompletedAccordions(allKeys);
+    };
+
+    const handleCloseAllCompleted = () => {
+        setOpenCompletedAccordions([]);
+    };
+
+    const handleOpenAllIncomplete = () => {
+        const allKeys = data.unfulfilled_requirements.map((_, index) => index.toString());
+        setOpenIncompleteAccordions(allKeys);
+    };
+
+    const handleCloseAllIncomplete = () => {
+        setOpenIncompleteAccordions([]);
+    };
 
     return (
         <>
@@ -74,12 +108,23 @@ function JustifiedTabs() {
                             return (
                                 <div className='lg:w-1/2 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>Completed Requirements from DARS</p>
-                                    <Accordion alwaysOpen>
+                                    <div className="mb-2">
+                                        <Button variant="outline-primary" size="sm" onClick={handleOpenAllCompleted} className="mr-2">Open All</Button>
+                                        <Button variant="outline-secondary" size="sm" onClick={handleCloseAllCompleted}>Close All</Button>
+                                    </div>
+                                    <Accordion activeKey={openCompletedAccordions}>
                                         {data && (
-
                                             data.completed_requirements.map((req, index) => (
                                                 <Accordion.Item key={index} eventKey={index.toString()}>
-                                                    <Accordion.Header>{req.category}</Accordion.Header>
+                                                    <Accordion.Header onClick={() => {
+                                                        setOpenCompletedAccordions(prev => 
+                                                            prev.includes(index.toString())
+                                                                ? prev.filter(key => key !== index.toString())
+                                                                : [...prev, index.toString()]
+                                                        );
+                                                    }}>
+                                                        {req.category}
+                                                    </Accordion.Header>
                                                     <Accordion.Body>
                                                         {req.earned && <p className='text-center'>Earned: <span className='font-bold'>{req.earned}</span></p>}
                                                         {req.details.length === 0 && <p>No details for this category.</p>}
@@ -97,19 +142,31 @@ function JustifiedTabs() {
                             return (
                                 <div className='lg:w-1/2 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>Incomplete Requirements from DARS</p>
-                                    <Accordion alwaysOpen>
+                                    <div className="mb-2">
+                                        <Button variant="outline-primary" size="sm" onClick={handleOpenAllIncomplete} className="mr-2">Open All</Button>
+                                        <Button variant="outline-secondary" size="sm" onClick={handleCloseAllIncomplete}>Close All</Button>
+                                    </div>
+                                    <Accordion activeKey={openIncompleteAccordions}>
                                         {data && (
                                             data.unfulfilled_requirements.map((req, index) => (
                                                 <Accordion.Item key={index} eventKey={index.toString()}>
-                                                    <Accordion.Header>{req.category}</Accordion.Header>
+                                                    <Accordion.Header onClick={() => {
+                                                        setOpenIncompleteAccordions(prev => 
+                                                            prev.includes(index.toString())
+                                                                ? prev.filter(key => key !== index.toString())
+                                                                : [...prev, index.toString()]
+                                                        );
+                                                    }}>
+                                                        {req.category}
+                                                    </Accordion.Header>
                                                     <Accordion.Body>
                                                         <div className='flex flex-row items-center justify-around'>
                                                             {req.earned && <p>Earned: <span className='font-bold'>{req.earned}</span></p>}
                                                             {req.needs && <p>Needs: <span className='font-bold'>{req.needs}</span></p>}
                                                         </div>
                                                         {req.details.length === 0 && <p>No details for this category.</p>}
-                                                        {req.details.map(detail => (
-                                                            <p className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\d+\)\s[A-Z]/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
+                                                        {req.details.map((detail, detailIndex) => (
+                                                            <p key={detailIndex} className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\d+\)\s[A-Z]/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
                                                         ))}
                                                     </Accordion.Body>
                                                 </Accordion.Item>

@@ -20,7 +20,10 @@ export default function Home() {
 
   return (
     <div>
-      <div className='lg:w-1/3 w-10/12 mx-auto'>
+      <div className="xl:w-1/2 w-10/12 mx-auto">
+        <FormComponent />
+      </div>
+      <div className='xl:w-2/3 w-10/12 mx-auto'>
         {data && (
           <div>
             <p className='text-center text-xl font-bold'>{name} DARS Report</p>
@@ -52,7 +55,6 @@ export default function Home() {
           </div>
         )}
         <ProgressBar />
-        <FormComponent />
       </div>
       <div className="xl:w-3/4 w-11/12 mx-auto">
         <Tabs />

@@ -6,6 +6,7 @@ import ProgressBar from "@/components/ProgressBar";
 import { useData } from "@/providers/DataContext";
 import { useEffect, useState } from "react";
 import Tabs from "@/components/Tabs";
+import DonutChart from "@/components/DonutChart";
 
 export default function Home() {
   const { data } = useData()
@@ -54,6 +55,7 @@ export default function Home() {
             <p className='text-center text-xl font-bold'>Prepared on: {data.preparation_date}</p>
           </div>
         )}
+        <DonutChart />
         <ProgressBar />
       </div>
       <div className="xl:w-3/4 w-11/12 mx-auto">

@@ -98,7 +98,7 @@ function FormFile() {
           <Form.Label className='text-center mx-auto'>Upload PDF file</Form.Label>
           <Form.Control type="file" onChange={handleFileChange} accept=".pdf" />
         </Form.Group>
-        {file && <button type="submit" className="btn btn-primary bg-red-700">Extract Data</button>}
+        {file && <button type="submit" className="btn btn-primary w-full bg-red-700">Extract Data</button>}
       </Form>
       {showAlert && (
         <div className='mt-2'>

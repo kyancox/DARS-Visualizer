@@ -58,7 +58,7 @@ export default function Home() {
         <DonutChart />
         <ProgressBar />
       </div>
-      <div className="xl:w-3/4 w-11/12 mx-auto">
+      <div className="xl:w-3/4 md:w-11/12 mx-auto">
         <Tabs />
       </div>
       <>

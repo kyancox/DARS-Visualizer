@@ -91,13 +91,25 @@ function JustifiedTabs() {
                     switch (key) {
                         case 'courses':
                             return (
-                                <div className='lg:w-1/2 mx-auto'>
+                                <div className='lg:w-2/3 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>All Recorded Courses from DARS</p>
+                                    <div className={`flex flex-row items-center justify-between mx-4 my-2`}>
+                                        <p className='sm:text-lg text-sm w-1/3 font-bold'>Course Code</p>
+                                        <p className='sm:text-lg text-sm w-1/3 text-center font-bold'>Course Name</p>
+                                        <p className='sm:text-lg text-sm w-1/3 text-right font-bold'># Credits (Status)</p>
+                                    </div>
                                     {data && (
 
-                                        data.all_courses.map((course) => (
-                                            <div key={course.course_name} className='flex flex-row space-x-1 m-2 border bg-gray-300 rounded-xl p-2 hover:opacity-60 transition duration-100'>
-                                                <p className='text-lg font-medium'>&#8226; {course.course_code}: {course.course_name}</p>
+                                        data.all_courses.map((course, index) => (
+                                            <div key={course.course_name} className={`flex flex-row items-center justify-between space-x-1 border border-gray-200 px-4 py-3 hover:opacity-60 transition duration-100 ${index == 0 ? 'rounded-t-md' : ''} ${index === data.all_courses.length - 1 ? 'rounded-b-md' : ''}`}>
+                                                <p className='sm:text-lg text-sm w-1/3'>{course.course_code}</p>
+                                                <p className='sm:text-lg text-sm w-1/3 text-center'>
+                                                    {course.course_name.includes('&')
+                                                        ? course.course_name.split('&').join(' & ')
+                                                        : course.course_name
+                                                    }
+                                                </p>
+                                                <p className='sm:text-lg text-sm w-1/3 text-right'>{course.credits}.00 credits ({course.status})</p>
                                             </div>
                                         ))
 
@@ -106,18 +118,18 @@ function JustifiedTabs() {
                             );
                         case 'completed':
                             return (
-                                <div className='lg:w-1/2 mx-auto'>
+                                <div className='lg:w-2/3 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>Completed Requirements from DARS</p>
-                                    <div className="mb-2">
-                                        <Button variant="outline-primary" size="sm" onClick={handleOpenAllCompleted} className="mr-2">Open All</Button>
-                                        <Button variant="outline-secondary" size="sm" onClick={handleCloseAllCompleted}>Close All</Button>
+                                    <div className="mb-2 flex items-center justify-between">
+                                        <Button variant="outline-primary" onClick={handleOpenAllCompleted} className="mr-2">Open All</Button>
+                                        <Button variant="outline-secondary" onClick={handleCloseAllCompleted}>Close All</Button>
                                     </div>
                                     <Accordion activeKey={openCompletedAccordions}>
                                         {data && (
                                             data.completed_requirements.map((req, index) => (
                                                 <Accordion.Item key={index} eventKey={index.toString()}>
                                                     <Accordion.Header onClick={() => {
-                                                        setOpenCompletedAccordions(prev => 
+                                                        setOpenCompletedAccordions(prev =>
                                                             prev.includes(index.toString())
                                                                 ? prev.filter(key => key !== index.toString())
                                                                 : [...prev, index.toString()]
@@ -129,7 +141,7 @@ function JustifiedTabs() {
                                                         {req.earned && <p className='text-center'>Earned: <span className='font-bold'>{req.earned}</span></p>}
                                                         {req.details.length === 0 && <p>No details for this category.</p>}
                                                         {req.details.map(detail => (
-                                                             <p className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\d+\)\s[A-Z]/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
+                                                            <p className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\d+\)\s[A-Z]/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
                                                         ))}
                                                     </Accordion.Body>
                                                 </Accordion.Item>
@@ -140,18 +152,18 @@ function JustifiedTabs() {
                             );
                         case 'incomplete':
                             return (
-                                <div className='lg:w-1/2 mx-auto'>
+                                <div className='lg:w-2/3 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>Incomplete Requirements from DARS</p>
-                                    <div className="mb-2">
-                                        <Button variant="outline-primary" size="sm" onClick={handleOpenAllIncomplete} className="mr-2">Open All</Button>
-                                        <Button variant="outline-secondary" size="sm" onClick={handleCloseAllIncomplete}>Close All</Button>
+                                    <div className="mb-2 flex items-center justify-between">
+                                        <Button variant="outline-primary" onClick={handleOpenAllIncomplete} className="mr-2">Open All</Button>
+                                        <Button variant="outline-secondary" onClick={handleCloseAllIncomplete}>Close All</Button>
                                     </div>
                                     <Accordion activeKey={openIncompleteAccordions}>
                                         {data && (
                                             data.unfulfilled_requirements.map((req, index) => (
                                                 <Accordion.Item key={index} eventKey={index.toString()}>
                                                     <Accordion.Header onClick={() => {
-                                                        setOpenIncompleteAccordions(prev => 
+                                                        setOpenIncompleteAccordions(prev =>
                                                             prev.includes(index.toString())
                                                                 ? prev.filter(key => key !== index.toString())
                                                                 : [...prev, index.toString()]
@@ -177,13 +189,25 @@ function JustifiedTabs() {
                             );
                         case 'inprogress':
                             return (
-                                <div className='lg:w-1/2 mx-auto'>
-                                    <p className='text-center text-xl md:text-2xl font-bold'>In Progress Courses from DARS</p>
+                                <div className='lg:w-2/3 mx-auto'>
+                                    <p className='text-center text-xl md:text-2xl font-bold'>All Recorded Courses from DARS</p>
+                                    <div className={`flex flex-row items-center justify-between mx-4 my-2`}>
+                                        <p className='sm:text-lg text-sm w-1/3 font-bold'>Course Code</p>
+                                        <p className='sm:text-lg text-sm w-1/3 text-center font-bold'>Course Name</p>
+                                        <p className='sm:text-lg text-sm w-1/3 text-right font-bold'># Credits (Status)</p>
+                                    </div>
                                     {data && (
 
-                                        data.in_progress_courses.map((course) => (
-                                            <div key={course.course_name} className='flex flex-row space-x-1 m-2 border bg-gray-300 rounded-xl p-2 hover:opacity-60 transition duration-100'>
-                                                <p className='text-lg font-medium'>&#8226; {course.course_code}: {course.course_name}</p>
+                                        data.in_progress_courses.map((course, index) => (
+                                            <div key={course.course_name} className={`flex flex-row items-center justify-between space-x-1 border border-gray-200 px-4 py-3 hover:opacity-60 transition duration-100 ${index == 0 ? 'rounded-t-md' : ''} ${index === data.all_courses.length - 1 ? 'rounded-b-md' : ''}`}>
+                                                <p className='sm:text-lg text-sm w-1/3'>{course.course_code}</p>
+                                                <p className='sm:text-lg text-sm w-1/3 text-center'>
+                                                    {course.course_name.includes('&')
+                                                        ? course.course_name.split('&').join(' & ')
+                                                        : course.course_name
+                                                    }
+                                                </p>
+                                                <p className='sm:text-lg text-sm w-1/3 text-right'>{course.credits}.00 credits ({course.status})</p>
                                             </div>
                                         ))
 

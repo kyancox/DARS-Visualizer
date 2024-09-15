@@ -223,49 +223,69 @@ function JustifiedTabs() {
                     <p className='text-center text-xl md:text-2xl font-bold mb-4'>Legend</p>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6 text-center'>
                         <div>
-                            <h3 className='text-lg font-semibold mb-2 text-center'>Course Symbols</h3>
-                            <ul className='space-y-1'>
-                                <li><span className='font-bold'>D</span> - Duplicate course - retains GPA effect</li>
-                                <li><span className='font-bold'>R</span> - Repeatable course</li>
-                                <li><span className='font-bold'>S</span> - Credit split between requirements</li>
-                                <li><span className='font-bold'>X</span> - Repeated course - no course credit or GPA effect</li>
-                                <li><span className='font-bold'>(R)</span> - Required course</li>
-                                <li><span className='font-bold'>(X)</span> - Original course value</li>
-                            </ul>
-                        </div>
-                        <div>
                             <h3 className='text-lg font-semibold mb-2 text-center'>Grade Symbols</h3>
-                            <ul className='space-y-1'>
+                            <ul className='space-y-1 h-48 border-2 rounded-md shadow overflow-y-scroll p-3 hover:border-blue-400 transition'>
                                 <li><span className='font-bold'>EI</span> - Extended incomplete</li>
                                 <li><span className='font-bold'>CR</span> - Credit (credit/no credit courses)</li>
                                 <li><span className='font-bold'>HS</span> - High school unit</li>
                                 <li><span className='font-bold'>IN</span> - Incomplete (credit/no credit courses)</li>
                                 <li><span className='font-bold'>INP</span> - In-progress course (current term)</li>
                                 <li><span className='font-bold'>I</span> - Incomplete</li>
-                                {/* Add more grade symbols as needed */}
+                                <li><span className='font-bold'>N</span> - No credit (credit/no credit courses)</li>
+                                <li><span className='font-bold'>NR</span> - Not reported</li>
+                                <li><span className='font-bold'>NW</span> - No work</li>
+                                <li><span className='font-bold'>PL</span> - Planned course</li>
+                                <li><span className='font-bold'>P</span> - Progress</li>
+                                <li><span className='font-bold'>PS</span> - Mock/pseudo course</li>
+                                <li><span className='font-bold'>Q</span> - Question on credits or honors</li>
+                                <li><span className='font-bold'>S</span> - Satisfactory (pass/fail and audit courses)</li>
+                                <li><span className='font-bold'>SD</span> - Satisfactory-disruption</li>
+                                <li><span className='font-bold'>T</span> - Transfer/test/advanced standing course</li>
+                                <li><span className='font-bold'>TI</span> - Transfer (in-progress)</li>
+                                <li><span className='font-bold'>U</span> - Unsatisfactory (pass/fail courses)</li>
+                                <li><span className='font-bold'>UD</span> - University-disruption no-credit</li>
                             </ul>
                         </div>
-                        <div className=''>
+                        <div>
+                            <h3 className='text-lg font-semibold mb-2 text-center'>Course Symbols</h3>
+                            <ul className='space-y-1 h-48 border-2 rounded-md shadow overflow-y-scroll p-3 hover:border-blue-400 transition'>
+                                 <li><span className='font-bold'>D</span> - Duplicate course - retains GPA effect</li>
+                                 <li><span className='font-bold'>R</span> - Repeatable course</li>
+                                 <li><span className='font-bold'>S</span> - Credit split between requirements</li>
+                                 <li><span className='font-bold'>X</span> - Repeated course - no course credit or GPA effect</li>
+                                 <li><span className='font-bold'>(R)</span> - Required course</li>
+                                 <li><span className='font-bold'>(X)</span> - Original course value</li>
+                            </ul>
+                        </div>
+                        <div>
                             <h3 className='text-lg font-semibold mb-2 text-center'>Requirement/Sub-requirement Information</h3>
-                            <ul className='space-y-1'>
+                            <ul className='space-y-1 h-48 border-2 rounded-md shadow overflow-y-scroll p-3 hover:border-blue-400 transition'>
                                 <li><span className='font-bold'>OK</span> - Requirement complete</li>
                                 <li><span className='font-bold'>NO</span> - Requirement not complete</li>
                                 <li><span className='font-bold'>IP</span> - Requirement uses in-progress credit/courses</li>
                                 <li><span className='font-bold'>IN-P</span> - Sub-requirement uses in progress credit/courses</li>
                                 <li><span className='font-bold'>PL</span> - Requirement/sub-requirement uses planned course</li>
                                 <li><span className='font-bold'>R</span> - Required sub-requirement (mandatory)</li>
-                                {/* Add more requirement information as needed */}
+                                <li><span className='font-bold'>&lt;&gt;</span> - Optional/other requirement in OR'd set complete</li>
+                                <li><span className='font-bold'>+</span> - Sub-requirement complete</li>
+                                <li><span className='font-bold'>-</span> - Sub-requirement not complete</li>
+                                <li><span className='font-bold'>*</span> - Optional sub-requirement, courses assigned</li>
+                                <li><span className='font-bold'>&nbsp;</span> - Optional sub-requirement, no courses assigned</li>
                             </ul>
                         </div>
-                        <div className=' p'>
+                        <div>
                             <h3 className='text-lg font-semibold mb-2 text-center'>Exception Symbols</h3>
-                            <ul className='space-y-1'>
+                            <ul className='space-y-1 h-48 border-2 rounded-md shadow overflow-y-scroll p-3 hover:border-blue-400 transition'>
                                 <li><span className='font-bold'>AC</span> - Course approved for requirement/sub-requirement</li>
                                 <li><span className='font-bold'>IC</span> - Course inserted into requirement/sub-requirement</li>
                                 <li><span className='font-bold'>EC</span> - Course exchanged for specified course</li>
                                 <li><span className='font-bold'>FC</span> - Course forced into requirement/sub-requirement</li>
                                 <li><span className='font-bold'>CM</span> - Course modified</li>
-                                {/* Add more exception symbols as needed */}
+                                <li><span className='font-bold'>CY</span> - Catalog year modified</li>
+                                <li><span className='font-bold'>DC</span> - Course deleted from requirement/sub-requirement</li>
+                                <li><span className='font-bold'>RM</span> - Requirement modified</li>
+                                <li><span className='font-bold'>WC</span> - Waive course</li>
+                                <li><span className='font-bold'>WP</span> - Waive mock/pseudo course</li>
                             </ul>
                         </div>
                     </div>

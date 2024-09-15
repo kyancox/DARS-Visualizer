@@ -7,6 +7,7 @@ import { useData } from "@/providers/DataContext";
 import { useEffect, useState } from "react";
 import Tabs from "@/components/Tabs";
 import DonutChart from "@/components/DonutChart";
+import BarChart from "@/components/BarChart";
 
 export default function Home() {
   const { data } = useData()
@@ -55,7 +56,10 @@ export default function Home() {
             <p className='text-center text-xl font-bold'>Prepared on: {data.preparation_date}</p>
           </div>
         )}
-        <DonutChart />
+        <div className="flex xl:flex-row flex-col items-center justify-center">
+          <DonutChart />
+          <BarChart/>
+        </div>
         <ProgressBar />
       </div>
       <div className="xl:w-3/4 md:w-11/12 mx-auto">

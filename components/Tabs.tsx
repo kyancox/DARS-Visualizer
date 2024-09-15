@@ -258,7 +258,7 @@ function JustifiedTabs() {
                             </ul>
                         </div>
                         <div>
-                            <h3 className='text-lg font-semibold mb-2 text-center'>Requirement/Sub-requirement Information</h3>
+                            <h3 className='text-lg font-semibold mb-2 text-center'>Requirement Information</h3>
                             <ul className='space-y-1 h-48 border-2 rounded-md shadow overflow-y-scroll p-3 hover:border-blue-400 transition'>
                                 <li><span className='font-bold'>OK</span> - Requirement complete</li>
                                 <li><span className='font-bold'>NO</span> - Requirement not complete</li>

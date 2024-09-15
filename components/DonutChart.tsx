@@ -18,8 +18,8 @@ const DonutChart: React.FC = () => {
         datasets: [
             {
                 data: [completedCount, unfulfilledCount],
-                backgroundColor: ['#198755', '#dc3545'], // Green for completed, Red for unfulfilled
-                borderColor: ['#198755', '#dc3545'],
+                backgroundColor: ['#429b70', '#e15864'], // Green for completed, Red for unfulfilled
+                borderColor: ['#429b70', '#e15864'],
                 borderWidth: 1,
             },
         ],
@@ -31,6 +31,13 @@ const DonutChart: React.FC = () => {
         plugins: {
             legend: {
                 position: 'bottom' as const,
+            },
+            title: {
+                display: true,
+                text: 'Degree Requirements',
+                font: {
+                    size: 14,
+                },
             },
         },
     };

@@ -27,12 +27,12 @@ function StackedProgressBar() {
 
     return (
         <>
-            <div className='flex sm:flex-row flex-col items-center justify-between lg:w-2/3 mx-auto mt-2'>
+            <div className='flex sm:flex-row flex-col items-center justify-between lg:w-2/3 mx-auto'>
                 <p className='text-green-400 font-medium'>Earned credits: <span className="font-bold">{earned}</span></p>
                 <p className='text-yellow-400 font-medium'>In progress credits: <span className="font-bold">{inProgress}</span></p>
                 <p className='text-red-500 font-medium'>Needed credits: <span className="font-bold">{needed}</span></p>
             </div>
-            <ProgressBar className='my-2'>
+            <ProgressBar className='md:my-2 my-3'>
                 <ProgressBar animated striped variant="success" now={earned ?? undefined} key={1} />
                 <ProgressBar animated striped variant="warning" now={inProgress ?? undefined} key={2} />
                 <ProgressBar animated striped variant="danger" now={needed ?? undefined} key={3} />

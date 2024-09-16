@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Tabs from "@/components/Tabs";
 import DonutChart from "@/components/DonutChart";
 import BarChart from "@/components/BarChart";
+import Divider from "@/components/Divider";
 
 export default function Home() {
   const { data } = useData()
@@ -27,15 +28,15 @@ export default function Home() {
       </div>
       <div className='xl:w-2/3 w-10/12 mx-auto'>
         {data && (
-          <div>
-            <p className='text-center text-xl font-bold'>{name} DARS Report</p>
-            <p className='text-center text-xl font-bold'>{data.requested_school}</p>
-            <p className='text-center text-xl font-bold'>{data.requested_major}</p>
+          <div className="my-4">
+            <p className='text-center text-2xl font-bold'>{name} DARS Report</p>
+            <p className='text-center text-xl'>{data.requested_school}</p>
+            <p className='text-center text-xl'>{data.requested_major}</p>
             {data.majors.length > 0 && (
               <div className="flex flex-row items-center justify-center">
-                <p className='text-center text-xl font-bold'>Declared majors:&nbsp;
+                <p className='text-center text-lg'>Declared majors:&nbsp;
                   {data.majors.map((major, index) => (
-                    <span key={index} className="text-xl font-bold">
+                    <span key={index} className="font-semibold">
                       {index > 0 ? ', ' : ''}{major}
                     </span>
                   ))}
@@ -44,38 +45,31 @@ export default function Home() {
             )}
             {data.certificates.length > 0 && (
               <div className="flex flex-row items-center justify-center">
-                <p className='text-center text-xl font-bold'>Declared certificates:&nbsp;
+                <p className='text-center text-lg'>Declared certificates:&nbsp;
                   {data.certificates.map((certificate, index) => (
-                    <span key={index} className="text-xl font-bold">
+                    <span key={index} className="font-semibold">
                       {index > 0 ? ', ' : ''}{certificate}
                     </span>
                   ))}
                 </p>
               </div>
             )}
-            <p className='text-center text-xl font-bold'>Prepared on: {data.preparation_date}</p>
+            <p className='text-center text-base'>Prepared on: <span className="font-medium">{data.preparation_date}</span></p>
           </div>
         )}
-        <div className="flex xl:flex-row flex-col items-center justify-center">
+        <Divider />
+        <div className="flex xl:flex-row flex-col items-center justify-center xl:space-y-0 space-y-4">
           <DonutChart />
-          <BarChart/>
+          <BarChart />
         </div>
-        <ProgressBar />
+        <Divider />
+        <div className="my-4">
+          <ProgressBar />
+        </div>
       </div>
       <div className="xl:w-3/4 md:w-11/12 mx-auto">
         <Tabs />
       </div>
-      <>
-        {/* <Button variant="primary">Primary</Button>{' '}
-        <Button variant="secondary">Secondary</Button>{' '}
-        <Button variant="success">Success</Button>{' '}
-        <Button variant="warning">Warning</Button>{' '}
-        <Button variant="danger">Danger</Button>{' '}
-        <Button variant="info">Info</Button>{' '}
-        <Button variant="light">Light</Button>{' '}
-        <Button variant="dark">Dark</Button>
-        <Button variant="link">Link</Button> */}
-      </>
 
     </div>
   );

@@ -43,9 +43,6 @@ const BarChart: React.FC = () => {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            legend: {
-                position: 'top' as const,
-            },
             title: {
                 display: true,
                 text: 'Course Distribution by Letter Grade',
@@ -77,7 +74,7 @@ const BarChart: React.FC = () => {
         maintainAspectRatio: false,
         plugins: {
             legend: {
-                position: 'top' as const,
+                position: 'bottom' as const,
             },
             title: {
                 display: true,
@@ -97,7 +94,7 @@ const BarChart: React.FC = () => {
             },
             y: {
                 title: {
-                    display: false,
+                    display: true,
                     text: 'Letter Grade',
                 },
             },

@@ -50,6 +50,10 @@ function FormFile() {
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState<string | null>('')
 
+  if (data) { 
+    return <button type="submit" onClick={() => setData(null)} className="btn btn-primary w-full bg-red-700">Submit Another Report</button>
+  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!file) {

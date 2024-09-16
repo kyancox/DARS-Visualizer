@@ -1,9 +1,11 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useData } from '@/providers/DataContext';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Divider from './Divider';
 
 function JustifiedTabs() {
     const [key, setKey] = useState('courses')
@@ -11,20 +13,15 @@ function JustifiedTabs() {
     const [openAccordions, setOpenAccordions] = useState<string[]>([]);
     const [openCompletedAccordions, setOpenCompletedAccordions] = useState<string[]>([]);
     const [openIncompleteAccordions, setOpenIncompleteAccordions] = useState<string[]>([]);
+    const [sortStatus, setSortStatus] = useState('All');
+
+    const uniqueStatuses = useMemo(() => {
+        if (!data) return ['All'];
+        const statuses = new Set(data.all_courses.map(course => course.status));
+        return ['All', ...Array.from(statuses)];
+    }, [data]);
 
     if (!data) return null
-
-    const handleOpenAll = () => {
-        const allKeys = [
-            ...data.completed_requirements.map((_, index) => index.toString()),
-            ...data.unfulfilled_requirements.map((_, index) => index.toString())
-        ];
-        setOpenAccordions(allKeys);
-    };
-
-    const handleCloseAll = () => {
-        setOpenAccordions([]);
-    };
 
     const handleOpenAllCompleted = () => {
         const allKeys = data.completed_requirements.map((_, index) => index.toString());
@@ -54,14 +51,14 @@ function JustifiedTabs() {
                     onSelect={(k) => k !== null && setKey(k)}
                     justify
                 >
-                    <Tab eventKey="courses" title={<span className="text-blue-500 ">All Courses</span>} className="" />
-                    <Tab eventKey="completed" title={<span className="text-green-500  ">Completed Requirements</span>} className="" />
-                    <Tab eventKey="incomplete" title={<span className="text-red-500 ">Incomplete Requirements</span>} className="" />
-                    <Tab eventKey="inprogress" title={<span className="text-yellow-500 ">In Progress Courses</span>} className="" />
+                    <Tab eventKey="courses" title={<span className="">All Courses</span>} className="" />
+                    <Tab eventKey="completed" title={<span className="">Completed Requirements</span>} className="" />
+                    <Tab eventKey="incomplete" title={<span className="">Incomplete Requirements</span>} className="" />
+                    <Tab eventKey="inprogress" title={<span className="">In Progress Courses</span>} className="" />
                 </Tabs>
             </div>
 
-            <div className='lg:hidden h-16 flex overflow-x-auto whitespace-nowrap '>
+            <div className='lg:hidden h-16 flex overflow-x-auto whitespace-nowrap mx-4 '>
                 <div className='flex flex-row items-center justify-center self-start mx-auto'>
                     <div className={`m-1 py-2 px-4 border border-border rounded-xl flex-shrink-0 transition ${key === 'courses' && 'bg-red-700 text-white'}`}
                         onClick={() => setKey('courses')}
@@ -93,34 +90,56 @@ function JustifiedTabs() {
                             return (
                                 <div className='lg:w-2/3 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>All Recorded Courses from DARS</p>
+                                    <div className='flex justify-end my-3'>
+                                        <Form.Select
+                                            value={sortStatus}
+                                            onChange={(e) => setSortStatus(e.target.value)}
+                                            className='w-48'
+                                        >
+                                            {uniqueStatuses.map(status => (
+                                                <option key={status} value={status}>{status}</option>
+                                            ))}
+                                        </Form.Select>
+                                    </div>
                                     <div className={`flex flex-row items-center justify-between mx-4 my-2`}>
                                         <p className='sm:text-lg text-sm w-1/3 font-bold'>Course Code</p>
                                         <p className='sm:text-lg text-sm w-1/3 text-center font-bold'>Course Name</p>
                                         <p className='sm:text-lg text-sm w-1/3 text-right font-bold'># Credits (Status)</p>
                                     </div>
-                                    {data && (
+                                    {data && (() => {
+                                        const filteredCourses = data.all_courses.filter(course => sortStatus === 'All' || course.status === sortStatus);
+                                        const totalCredits = filteredCourses.reduce((sum, course) => sum + Number(course.credits), 0);
 
-                                        data.all_courses.map((course, index) => (
-                                            <div key={course.course_name} className={`flex flex-row items-center justify-between space-x-1 border border-gray-200 px-4 py-3 hover:opacity-60 transition duration-100 ${index == 0 ? 'rounded-t-md' : ''} ${index === data.all_courses.length - 1 ? 'rounded-b-md' : ''}`}>
-                                                <p className='sm:text-lg text-sm w-1/3'>{course.course_code}</p>
-                                                <p className='sm:text-lg text-sm w-1/3 text-center'>
-                                                    {course.course_name.includes('&')
-                                                        ? course.course_name.split('&').join(' & ')
-                                                        : course.course_name
+                                        return (
+                                            <>
+                                                {filteredCourses.map((course, index) => (
+                                                    <div key={course.course_name} className={`flex flex-row items-center justify-between space-x-1 border border-gray-200 px-4 py-3 hover:opacity-60 transition duration-100 ${index === 0 ? 'rounded-t-md' : ''} ${index === filteredCourses.length - 1 ? 'rounded-b-md' : ''}`}>
+                                                        <p className='sm:text-lg text-sm w-1/3'>{course.course_code}</p>
+                                                        <p className='sm:text-lg text-sm w-1/3 text-center'>
+                                                            {course.course_name.includes('&')
+                                                                ? course.course_name.split('&').join(' & ')
+                                                                : course.course_name
+                                                            }
+                                                        </p>
+                                                        <p className='sm:text-lg text-sm w-1/3 text-right'>{course.credits}.00 credits ({course.status})</p>
+                                                    </div>
+                                                ))}
+                                                <div className='mt-4 mr-1 text-right font-bold'>
+                                                    {(sortStatus === 'All' && Number(data.credits.earned_credits) !== Number(totalCredits.toFixed(2))) && 
+                                                        <p className='font-light'>Note: Some courses may not count towards degree.</p>
                                                     }
-                                                </p>
-                                                <p className='sm:text-lg text-sm w-1/3 text-right'>{course.credits}.00 credits ({course.status})</p>
-                                            </div>
-                                        ))
-
-                                    )}
+                                                    <p>Total Credits ({sortStatus}): {totalCredits.toFixed(2)}</p>
+                                                </div>
+                                            </>
+                                        );
+                                    })()}
                                 </div>
                             );
                         case 'completed':
                             return (
                                 <div className='lg:w-2/3 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>Completed Requirements from DARS</p>
-                                    <div className="mb-2 flex items-center justify-between">
+                                    <div className="mt-2 mb-3 flex items-center justify-between">
                                         <Button variant="outline-primary" onClick={handleOpenAllCompleted} className="mr-2">Open All</Button>
                                         <Button variant="outline-secondary" onClick={handleCloseAllCompleted}>Close All</Button>
                                     </div>
@@ -154,7 +173,7 @@ function JustifiedTabs() {
                             return (
                                 <div className='lg:w-2/3 mx-auto'>
                                     <p className='text-center text-xl md:text-2xl font-bold'>Incomplete Requirements from DARS</p>
-                                    <div className="mb-2 flex items-center justify-between">
+                                    <div className="mt-2 mb-3 flex items-center justify-between">
                                         <Button variant="outline-primary" onClick={handleOpenAllIncomplete} className="mr-2">Open All</Button>
                                         <Button variant="outline-secondary" onClick={handleCloseAllIncomplete}>Close All</Button>
                                     </div>
@@ -219,7 +238,9 @@ function JustifiedTabs() {
                     }
                 })()}
 
-                <div className='lg:w-2/3 mx-auto mt-4'>
+
+                <div className='lg:w-2/3 mx-auto'>
+                <Divider/>
                     <p className='text-center text-xl md:text-2xl font-bold mb-4'>Legend</p>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6 text-center'>
                         <div>
@@ -249,12 +270,12 @@ function JustifiedTabs() {
                         <div>
                             <h3 className='text-lg font-semibold mb-2 text-center'>Course Symbols</h3>
                             <ul className='space-y-1 h-48 border-2 rounded-md shadow overflow-y-scroll p-3 hover:border-blue-400 transition'>
-                                 <li><span className='font-bold'>D</span> - Duplicate course - retains GPA effect</li>
-                                 <li><span className='font-bold'>R</span> - Repeatable course</li>
-                                 <li><span className='font-bold'>S</span> - Credit split between requirements</li>
-                                 <li><span className='font-bold'>X</span> - Repeated course - no course credit or GPA effect</li>
-                                 <li><span className='font-bold'>(R)</span> - Required course</li>
-                                 <li><span className='font-bold'>(X)</span> - Original course value</li>
+                                <li><span className='font-bold'>D</span> - Duplicate course - retains GPA effect</li>
+                                <li><span className='font-bold'>R</span> - Repeatable course</li>
+                                <li><span className='font-bold'>S</span> - Credit split between requirements</li>
+                                <li><span className='font-bold'>X</span> - Repeated course - no course credit or GPA effect</li>
+                                <li><span className='font-bold'>(R)</span> - Required course</li>
+                                <li><span className='font-bold'>(X)</span> - Original course value</li>
                             </ul>
                         </div>
                         <div>

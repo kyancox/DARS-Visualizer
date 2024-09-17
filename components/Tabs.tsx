@@ -10,7 +10,6 @@ import Divider from './Divider';
 function JustifiedTabs() {
     const [key, setKey] = useState('courses')
     const { data } = useData()
-    const [openAccordions, setOpenAccordions] = useState<string[]>([]);
     const [openCompletedAccordions, setOpenCompletedAccordions] = useState<string[]>([]);
     const [openIncompleteAccordions, setOpenIncompleteAccordions] = useState<string[]>([]);
     const [sortStatus, setSortStatus] = useState('All');
@@ -239,7 +238,7 @@ function JustifiedTabs() {
                 })()}
 
 
-                <div className='lg:w-2/3 mx-auto'>
+                <div className='lg:w-2/3 mx-auto mb-4'>
                 <Divider/>
                     <p className='text-center text-xl md:text-2xl font-bold mb-4'>Legend</p>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-6 text-center'>

@@ -50,8 +50,8 @@ function FormFile() {
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState<string | null>('')
 
-  if (data) { 
-    return <button type="submit" onClick={() => setData(null)} className="btn btn-primary w-full bg-red-700">Submit Another Report</button>
+  if (data) {
+    return <button type="submit" onClick={() => setData(null)} className="btn btn-primary w-full mt-4 bg-red-700">Submit Another Report</button>
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -96,13 +96,13 @@ function FormFile() {
     }
   };
   return (
-    <div>
+    <div className='mb-6'>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label className='text-center mx-auto'>Upload PDF file</Form.Label>
+          <Form.Label className='text-center mx-auto font-semibold'>Upload PDF file</Form.Label>
           <Form.Control type="file" onChange={handleFileChange} accept=".pdf" />
         </Form.Group>
-        {file && <button type="submit" className="btn btn-primary w-full bg-red-700">Extract Data</button>}
+        <button type="submit" disabled={!file} className="btn btn-primary w-full border-red-700 bg-red-700">Extract Data</button>
       </Form>
       {showAlert && (
         <div className='mt-2'>

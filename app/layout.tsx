@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';  // Import Bootstrap CSS
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { DataProvider } from '@/providers/DataContext';
+import Footer from "@/components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,6 +35,7 @@ export default function RootLayout({
         <DataProvider>
           <Navbar/>
           {children}
+          <Footer/>
         </DataProvider>
       </body>
     </html>

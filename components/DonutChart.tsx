@@ -8,17 +8,12 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const DonutChart: React.FC = () => {
     const { data } = useData();
 
-    if (!data) return null;
-
-    const completedCount = data.completed_requirements.length;
-    const unfulfilledCount = data.unfulfilled_requirements.length;
-
-    const chartData = {
+    const sampleData = {
         labels: ['Completed', 'Incomplete'],
         datasets: [
             {
-                data: [completedCount, unfulfilledCount],
-                backgroundColor: ['#429b70', '#e15864'], // Green for completed, Red for unfulfilled
+                data: [16, 9],
+                backgroundColor: ['#429b70', '#e15864'],
                 borderColor: ['#429b70', '#e15864'],
                 borderWidth: 1,
             },
@@ -40,6 +35,27 @@ const DonutChart: React.FC = () => {
                 },
             },
         },
+    };
+
+    if (!data) return (
+        <div className='w-full h-96'>
+            <Doughnut data={sampleData} options={options} />
+        </div>
+    );
+
+    const completedCount = data.completed_requirements.length;
+    const unfulfilledCount = data.unfulfilled_requirements.length;
+
+    const chartData = {
+        labels: ['Completed', 'Incomplete'],
+        datasets: [
+            {
+                data: [completedCount, unfulfilledCount],
+                backgroundColor: ['#429b70', '#e15864'], // Green for completed, Red for unfulfilled
+                borderColor: ['#429b70', '#e15864'],
+                borderWidth: 1,
+            },
+        ],
     };
 
     return (

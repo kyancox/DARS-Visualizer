@@ -20,10 +20,14 @@ function StackedProgressBar() {
             setInProgress(inProgressCredits)
             setNeeded(neededCredits)
             setTotal(earnedCredits + inProgressCredits + neededCredits)
+        } else {
+            // Sample data
+            setEarned(60)
+            setInProgress(15)
+            setNeeded(45)
+            setTotal(120)
         }
     }, [data])
-
-    if (!data) return null
 
     return (
         <>
@@ -33,9 +37,9 @@ function StackedProgressBar() {
                 <p className='text-red-500 font-medium'>Needed credits: <span className="font-bold">{needed}</span></p>
             </div>
             <ProgressBar className='md:my-2 my-3'>
-                <ProgressBar animated striped variant="success" now={earned ?? undefined} key={1} />
-                <ProgressBar animated striped variant="warning" now={inProgress ?? undefined} key={2} />
-                <ProgressBar animated striped variant="danger" now={needed ?? undefined} key={3} />
+                <ProgressBar animated striped variant="success" now={(earned / total) * 100} key={1} />
+                <ProgressBar animated striped variant="warning" now={(inProgress / total) * 100} key={2} />
+                <ProgressBar animated striped variant="danger" now={(needed / total) * 100} key={3} />
             </ProgressBar>
             <p className='text-center font-medium'>Total credits to graduate: <span className="font-bold">{total}</span></p>
         </>

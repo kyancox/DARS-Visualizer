@@ -1,5 +1,7 @@
+"use client"
 import { openAsBlob } from 'fs';
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 const ContactForm = () => {
     const [email, setEmail] = useState('');
@@ -40,7 +42,7 @@ const ContactForm = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="mt-1 p-4 block w-full rounded-md bg-spotify text-white border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    className="mt-1 p-4 block w-full rounded-md border-2 hover:border-blue-400 shadow transition duration-50"
                 />
             </div>
             <div>
@@ -52,12 +54,12 @@ const ContactForm = () => {
                     onChange={(e) => setMessage(e.target.value)}
                     required
                     rows={4}
-                    className="mt-1 p-4 block w-full min-h-36 rounded-md bg-spotify text-white border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    className="mt-1 p-4 block w-full min-h-36 rounded-md border-2 hover:border-blue-400 shadow transition duration-50"
                 ></textarea>
             </div>
             <button
                 type="submit"
-                className={`inline-flex items-center px-4 py-2 border bg-spotify ${email && message ? 'text-white' : 'text-gray-400'} border-transparent text-sm font-medium rounded-md shadow-sm text-background bg-foreground hover:opacity-80 transition duration-100  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                className={`inline-flex items-center px-4 py-2 border-2 text-gray-400 hover:border-blue-400 text-sm font-medium rounded-md shadow-sm text-background bg-foreground hover:opacity-80 transition duration-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
             >
                 Send Message
             </button>

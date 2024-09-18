@@ -24,7 +24,7 @@ export default function Home() {
   }, [data])
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <div className="xl:w-1/2 w-10/12 mx-auto">
         {!data && (
           <div>

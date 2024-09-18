@@ -80,6 +80,7 @@ function FormFile() {
 
       setShowAlert(false)
       setData(data);
+      setFile(null)
       console.log(data)
       // Handle the response data as needed
     } catch (error) {

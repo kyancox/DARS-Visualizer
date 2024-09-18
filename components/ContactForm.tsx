@@ -59,7 +59,7 @@ const ContactForm = () => {
             </div>
             <button
                 type="submit"
-                className={`inline-flex items-center px-4 py-2 border-2 text-gray-400 hover:border-blue-400 text-sm font-medium rounded-md shadow-sm text-background bg-foreground hover:opacity-80 transition duration-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                className={`font-semibold inline-flex items-center px-4 py-2 border-2 text-gray-400 hover:border-blue-400 text-sm rounded-md shadow-sm text-background bg-foreground hover:opacity-80 transition duration-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
             >
                 Send Message
             </button>

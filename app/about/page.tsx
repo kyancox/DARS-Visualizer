@@ -37,7 +37,7 @@ const About = () => {
 
       <div >
         <p className='font-bold text-center text-2xl my-1'>About</p>
-        <p className='text-center xl:w-3/4 mx-auto font-medium md:text-lg'>DARS Visualizer provides a user-friendly interface for UW-Madison students to view their DARS reports. UW-Madison&apos;s DARS report includes an abundance of data that isn't displayed on the DARS interface, like courses taken, grades in those courses, and total credits earned at UW-Madison. DARS Visualizer makes use of that data by displaying it in an easy to read interface, utilizing charts and graphs to make your reports easier to understand. Get started by uploading your DARS report to DARS Visualizer.</p>
+        <p className='text-center xl:w-3/4 mx-auto font-medium md:text-lg'>DARS Visualizer provides a user-friendly interface for UW-Madison students to view their DARS reports. UW-Madison&apos;s DARS report includes an abundance of data that isn&apos;t displayed on the DARS interface, like courses taken, grades in those courses, and total credits earned at UW-Madison. DARS Visualizer makes use of that data by displaying it in an easy to read interface, utilizing charts and graphs to make your reports easier to understand. Get started by uploading your DARS report to DARS Visualizer.</p>
         <Divider />
       </div>
       <div className='flex flex-col items-center justify-center'>

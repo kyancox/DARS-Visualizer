@@ -3,47 +3,7 @@
 import { useState } from 'react';
 import { useData } from '@/providers/DataContext';
 import Form from 'react-bootstrap/Form';
-import { Spinner } from 'react-bootstrap';
 import AlertDismissible from './Alert';
-
-interface ExtractedData {
-  student_name: string | null;
-  preparation_date: string | null;
-  requested_school: string | null;
-  requested_major: string | null;
-  majors: string[];
-  certificates: string[];
-  credits: {
-    status: string;
-    earned_credits: number;
-    in_progress_credits: number;
-    needed_credits: number;
-  };
-  in_progress_courses: Array<{
-    semester: string;
-    course_code: string;
-    credits: number;
-    status: string;
-    course_name: string;
-  }>;
-  all_courses: Array<{
-    course_code: string;
-    credits: number;
-    status: string;
-    course_name: string;
-  }>;
-  completed_requirements: Array<{
-    category: string;
-    earned: string | null;
-    details: string[];
-  }>;
-  unfulfilled_requirements: Array<{
-    category: string;
-    needs: string | null;
-    earned: string | null;
-    details: string[];
-  }>;
-}
 
 function FormFile() {
   const [file, setFile] = useState<File | null>(null);
@@ -66,7 +26,9 @@ function FormFile() {
     const formData = new FormData();
     formData.append('file', file);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const aws = 'http://18.216.43.199/extract-data/'
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const localhost = 'http://localhost:8000'
 
     try {

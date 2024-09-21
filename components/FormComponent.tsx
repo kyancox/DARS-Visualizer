@@ -64,8 +64,11 @@ function FormFile() {
     const formData = new FormData();
     formData.append('file', file);
 
+    const aws = 'http://18.216.43.199/extract-data/'
+    const localhost = 'http://localhost:8000'
+
     try {
-      const response = await fetch('http://localhost:8000/extract-data/', {
+      const response = await fetch(localhost, {
         method: 'POST',
         body: formData,
       });
@@ -98,13 +101,6 @@ function FormFile() {
   };
   return (
     <div className='mb-6'>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label className='text-center mx-auto font-semibold'>Upload PDF file</Form.Label>
-          <Form.Control type="file" onChange={handleFileChange} accept=".pdf" />
-        </Form.Group>
-        <button type="submit" disabled={!file} className="btn btn-primary w-full border-red-700 bg-red-700">Extract Data</button>
-      </Form>
       {showAlert && (
         <div className='mt-2'>
           <AlertDismissible
@@ -115,6 +111,13 @@ function FormFile() {
           />
         </div>
       )}
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formFile" className="mb-3">
+          <Form.Label className='text-center mx-auto font-semibold'>Upload PDF file</Form.Label>
+          <Form.Control type="file" onChange={handleFileChange} accept=".pdf" />
+        </Form.Group>
+        <button type="submit" disabled={!file} className="btn btn-primary w-full border-red-700 bg-red-700">Extract Data</button>
+      </Form>
     </div>
   );
 }

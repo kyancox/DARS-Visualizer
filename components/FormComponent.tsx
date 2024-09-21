@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useData } from '@/providers/DataContext';
 import Form from 'react-bootstrap/Form';
+import { Spinner } from 'react-bootstrap';
 import AlertDismissible from './Alert';
 
 interface ExtractedData {
@@ -49,6 +50,7 @@ function FormFile() {
   const { data, setData } = useData()
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState<string | null>('')
+  const [loading, setLoading] = useState(false)
 
   if (data) {
     return <button type="submit" onClick={() => setData(null)} className="btn btn-primary w-full mt-4 bg-red-700">Submit Another Report</button>
@@ -68,20 +70,23 @@ function FormFile() {
     const localhost = 'http://localhost:8000'
 
     try {
-      const response = await fetch(localhost, {
+      const response = await fetch(aws, {
         method: 'POST',
         body: formData,
       });
+      setLoading(true)
 
       const data = await response.json();
 
       if (!response.ok) {
+        setLoading(false)
         setShowAlert(true);
         setError(data.detail)
         return;
       }
 
       setShowAlert(false)
+      setLoading(false)
       setData(data);
       setFile(null)
       console.log(data)
@@ -116,6 +121,13 @@ function FormFile() {
           <Form.Label className='text-center mx-auto font-semibold'>Upload PDF file</Form.Label>
           <Form.Control type="file" onChange={handleFileChange} accept=".pdf" />
         </Form.Group>
+        {loading && (
+          <div className="d-flex align-items-center mb-4">
+            <strong>Loading...</strong>
+            <div className="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+          </div>
+        )
+        }
         <button type="submit" disabled={!file} className="btn btn-primary w-full border-red-700 bg-red-700">Extract Data</button>
       </Form>
     </div>

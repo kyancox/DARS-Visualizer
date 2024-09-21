@@ -2,7 +2,6 @@
 
 // components/Navbar.js
 import Link from 'next/link';
-import Image from 'next/image';
 import { useData } from '@/providers/DataContext';
 import { usePathname } from 'next/navigation';
 

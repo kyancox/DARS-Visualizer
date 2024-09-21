@@ -5,10 +5,6 @@ import { useData } from '@/providers/DataContext';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const isMobileDevice = () => {
-    return window.innerWidth <= 768;
-};
-
 const BarChart: React.FC = () => {
     const { data } = useData();
 

@@ -1,7 +1,5 @@
 "use client"
 import FormComponent from "@/components/FormComponent";
-import Button from 'react-bootstrap/Button';
-import Image from "next/image";
 import ProgressBar from "@/components/ProgressBar";
 import { useData } from "@/providers/DataContext";
 import { useEffect, useState } from "react";

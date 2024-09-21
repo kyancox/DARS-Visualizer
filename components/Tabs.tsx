@@ -158,8 +158,8 @@ function JustifiedTabs() {
                                                     <Accordion.Body>
                                                         {req.earned && <p className='text-center'>Earned: <span className='font-bold'>{req.earned}</span></p>}
                                                         {req.details.length === 0 && <p>No details for this category.</p>}
-                                                        {req.details.map(detail => (
-                                                            <p className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\d+\)\s[A-Z]/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
+                                                        {req.details.map((detail, index) => (
+                                                            <p key={index} className={(detail.includes('IP') || detail.includes('IN-P') || detail.toLowerCase().includes('in-progress') || /\d+\)\s[A-Z]/.test(detail)) ? 'font-bold' : detail.includes('SELECT FROM:') ? 'font-semibold' : ''}>{detail}</p>
                                                         ))}
                                                     </Accordion.Body>
                                                 </Accordion.Item>
@@ -286,7 +286,7 @@ function JustifiedTabs() {
                                 <li><span className='font-bold'>IN-P</span> - Sub-requirement uses in progress credit/courses</li>
                                 <li><span className='font-bold'>PL</span> - Requirement/sub-requirement uses planned course</li>
                                 <li><span className='font-bold'>R</span> - Required sub-requirement (mandatory)</li>
-                                <li><span className='font-bold'>&lt;&gt;</span> - Optional/other requirement in OR'd set complete</li>
+                                <li><span className='font-bold'>&lt;&gt;</span> - Optional/other requirement in OR&apos;d set complete</li>
                                 <li><span className='font-bold'>+</span> - Sub-requirement complete</li>
                                 <li><span className='font-bold'>-</span> - Sub-requirement not complete</li>
                                 <li><span className='font-bold'>*</span> - Optional sub-requirement, courses assigned</li>

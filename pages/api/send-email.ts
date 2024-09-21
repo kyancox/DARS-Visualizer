@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { email, message } = req.body
 
     // Create a transporter using SMTP
-    let transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: 587,
       secure: false, // true for 465, false for other ports

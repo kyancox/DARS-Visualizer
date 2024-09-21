@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 
 interface AlertDismissibleProps {
@@ -9,7 +8,6 @@ interface AlertDismissibleProps {
 }
 
 function AlertDismissible({ variant, title: heading, body, onClose }: AlertDismissibleProps) {
-
 
   return (
     <Alert variant={variant} onClose={onClose} dismissible>

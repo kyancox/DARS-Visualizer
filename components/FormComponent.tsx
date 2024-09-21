@@ -27,7 +27,7 @@ function FormFile() {
     formData.append('file', file);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const aws = 'http://18.216.43.199/extract-data/'
+    const aws = 'http://18.216.43.199:80/extract-data/'
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const localhost = 'http://localhost:8000'
 

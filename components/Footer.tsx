@@ -20,7 +20,7 @@ export default function Footer() {
         <footer className='flex flex-col justify-center items-center'>
             <div className="bg-red-700/65 px-6 text-center rounded-t-lg pt-3 pb-1 space-y-1">
                 <div className='flex items-center justify-center space-x-2'>
-                    <a href="https://github.com/kyancox/LLM-Comparison-App/" target="_blank" className='flex flex-row justify-center items-center w-5/12 py-1 bg-[#24292e] text-white rounded hover:bg-[#444d56] transition duration-300 font-medium'>
+                    <a href="https://github.com/kyancox/DARS-Visualizer-Frontend/" target="_blank" className='flex flex-row justify-center items-center w-5/12 py-1 bg-[#24292e] text-white rounded hover:bg-[#444d56] transition duration-300 font-medium'>
                         <MdiGithub className='mr-2' />
                         <p>GitHub</p>
                     </a>

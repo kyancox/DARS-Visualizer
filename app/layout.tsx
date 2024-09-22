@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { DataProvider } from '@/providers/DataContext';
 import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/react"
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: Readonly<{ 
   children: React.ReactNode;
 }>) {
   return (
@@ -39,6 +40,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer/>
+          <GoogleAnalytics gaId={process.env.GOOGLE_MEASUREMENT_ID as string}/>
           <Analytics/>
         </DataProvider>
       </body>

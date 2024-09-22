@@ -27,6 +27,7 @@ export default function Home() {
         {!data && (
           <div>
             <p className="text-center text-lg font-semibold mt-4">DARS Visualizer allows UW-Madison students to view their DARS reports in a more organized manner, including charts and graphs to make your reports easier to understand.</p>
+            <p className="text-sm font-medium text-center">Note: Certficate DARS reports are currently not allowed.</p>
             <p className="font-bold my-3">Example graphs:</p>
             <div>
               <div className='border mb-6' />

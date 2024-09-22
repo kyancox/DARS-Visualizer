@@ -45,8 +45,11 @@ const About = () => {
         <Link className="font-medium hover:underline cursor-pointer text-red-500 text-center" href='/tutorial'>Click this link to read about how to download your DARS report.</Link>
       </div>
       <Divider />
-
-
+      <div className='flex flex-col items-center justify-center'>
+        <p className='font-bold text-center text-2xl mb-1'>Data Storage</p>
+        <p className="text-center xl:w-3/4 mx-auto font-medium">DARS Visualizer does not store any user data. Your information is securely transmitted to the <Link target='_blank' href={'https://api.darsvisualizer.com/docs'} className='text-red-500 hover:underline cursor-pointer'>API</Link> for processing and is not stored on any servers.</p>
+      </div>
+      <Divider />
 
       <div className="my-4 flex flex-col items-center">
         <div className="mx-6 space-y-1">

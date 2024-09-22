@@ -27,9 +27,9 @@ function FormFile() {
     formData.append('file', file);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const aws = 'http://18.216.43.199:80/extract-data/'
+    const aws = 'https://api.darsvisualizer.com/extract-data/'
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const localhost = 'http://localhost:8000'
+    const localhost = 'http://localhost:8000/extract-data'
 
     try {
       const response = await fetch(aws, {

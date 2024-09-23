@@ -67,7 +67,7 @@ function FormFile() {
     }
   };
   return (
-    <div className='mb-6'>
+    <div className='md:mb-4 mb-6'>
       {showAlert && (
         <div className='mt-2'>
           <AlertDismissible

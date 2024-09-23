@@ -27,7 +27,7 @@ export default function Home() {
         {!data && (
           <div>
             <p className="text-center text-lg font-semibold mt-4">DARS Visualizer allows UW-Madison students to view their DARS reports in a more organized manner, including charts and graphs to make your reports easier to understand.</p>
-            <p className="text-sm font-medium text-center">Note: Certficate DARS reports are currently not allowed.</p>
+            <p className="text-sm font-medium text-center mt-1">Note: Certficate DARS reports are currently not allowed.</p>
             <p className="font-bold my-3">Example graphs:</p>
             <div>
               <div className='border mb-6' />
@@ -40,7 +40,7 @@ export default function Home() {
               </div>
               <Divider />
             </div>
-            <div className="text-center mb-6 space-y-1">
+            <div className="text-center md:mb-2 mb-6 space-y-1">
               <p className="text-center font-semibold">Download your DARS report as a PDF from <Link href='https://enroll.wisc.edu/dars' target='_blank' className="text-red-500 hover:underline">enroll.wisc.edu/dars</Link> to get started.</p>
               {/* <p className="font-medium text-center">Then, upload your PDF file below and click 'Extract Data' to view your report.</p> */}
               <Link className="font-medium hover:underline cursor-pointer text-red-500" href='/tutorial'>Not sure how to download your DARS report?</Link>

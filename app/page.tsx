@@ -83,6 +83,7 @@ export default function Home() {
               <p className='text-center text-base'>Prepared on: <span className="font-medium">{data.preparation_date}</span></p>
             </div>
             <Divider />
+            <p className="text-center font-medium text-lg">GPA: <span className="font-bold">{data.gpa}</span></p>
             <div className="flex xl:flex-row flex-col items-center justify-center xl:space-y-0 space-y-4">
               <DonutChart />
               <BarChart />
@@ -94,13 +95,13 @@ export default function Home() {
           </div>
           <div className="xl:w-3/4 md:w-11/12 mx-auto">
             <Tabs />
-           <div className="my-4 flex flex-col items-center">
-             <div className="mx-6 space-y-1">
-               <p className="lg:text-2xl text-lg text-center font-medium">Do you have issues, questions, or suggestions?</p>
-               <p className="lg:text-lg text-center ">Please share your thoughts, concerns, or problems below!</p>
-             </div>
-             <ContactForm />
-           </div>
+            <div className="my-4 flex flex-col items-center">
+              <div className="mx-6 space-y-1">
+                <p className="lg:text-2xl text-lg text-center font-medium">Do you have issues, questions, or suggestions?</p>
+                <p className="lg:text-lg text-center ">Please share your thoughts, concerns, or problems below!</p>
+              </div>
+              <ContactForm />
+            </div>
           </div>
         </>
       )}

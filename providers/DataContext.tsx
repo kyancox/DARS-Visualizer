@@ -6,6 +6,7 @@ interface ExtractedData {
   preparation_date: string | null;
   requested_school: string | null;
   requested_major: string | null;
+  gpa: string | null;
   majors: string[];
   certificates: string[];
   credits: {

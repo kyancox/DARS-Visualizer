@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import { useData } from '@/providers/DataContext';
 import Form from 'react-bootstrap/Form';
+import { sendGAEvent } from '@next/third-parties/google';
 import AlertDismissible from './Alert';
+import { send } from 'process';
 
 function FormFile() {
   const [file, setFile] = useState<File | null>(null);
@@ -30,6 +32,8 @@ function FormFile() {
     const aws = 'https://api.darsvisualizer.com/extract-data/'
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const localhost = 'http://localhost:8000/extract-data'
+
+    sendGAEvent('event', 'extract_data')
 
     try {
       const response = await fetch(aws, {

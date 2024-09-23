@@ -5,7 +5,6 @@ import { useData } from '@/providers/DataContext';
 import Form from 'react-bootstrap/Form';
 import { sendGAEvent } from '@next/third-parties/google';
 import AlertDismissible from './Alert';
-import { send } from 'process';
 
 function FormFile() {
   const [file, setFile] = useState<File | null>(null);

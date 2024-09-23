@@ -17,6 +17,14 @@ function FormFile() {
     return <button type="submit" onClick={() => setData(null)} className="btn btn-primary w-full mt-4 bg-red-700">Submit Another Report</button>
   }
 
+  const increaseCount = async () => {
+    try {
+      await fetch('/api/increase-count', { method: 'POST' });
+    } catch (error) {
+      console.error('Error incrementing usage count:', error);
+    }
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!file) {
@@ -60,6 +68,8 @@ function FormFile() {
       console.error('Error uploading file:', error);
       setError(error instanceof Error ? error.message : String(error));
       setShowAlert(true);
+    } finally {
+      increaseCount()
     }
   };
 
